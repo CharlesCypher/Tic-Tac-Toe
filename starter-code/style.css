@@ -164,14 +164,8 @@ button {
     margin: auto 0;
     border-radius: .5rem;
     transform: translateX(93%);
-    transition: transform .2s ease-in-out;
-    background: rgb(34, 193, 195);
-    background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+    background-color: var(--clr-bg);
     z-index: -1;
-}
-
-.marks-btn-wrapper .toggle-slide.slide {
-    transform: translateX(0);
 }
 
 .marks-btn-wrapper button {
