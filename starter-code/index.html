@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Tic Tac Toe</title>
+  </head>
+  <body>
+    <div class="game-showcase">
+      <div class="h2">vs cpu coming soon!</div>
+      <div class="game-intro-info">
+        <div class="player-mark">
+          <div class="cross"></div>
+          <div class="circle"></div>
+        </div>
+        <div class="info-content">
+          <h3 class="player-marks-text">Pick player 1's mark</h3>
+          <div class="marks-btn-wrapper">
+            <div class="toggle-slide slide"></div>
+            <button class="mark-cross">
+              <div class="cross"></div>
+            </button>
+            <button class="mark-circle">
+              <div class="circle"></div>
+            </button>
+          </div>
+          <p class="reminder-text">Remember : x goes first</p>
+        </div>
+        <button class="vs-cpu-btn choice-btn">new game (vs cpu)</button>
+        <button class="vs-player-btn choice-btn">new game (vs player)</button>
+      </div>
+      <section class="game-board-section">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+          <g fill="#fff">
+            <polygon points="14.025,38.004 14.025,61.993 31.548,61.993 55.537,85.982 55.537,14.018 31.552,38.004"></polygon>
+            <path d="M67.41,34.095l-4.243,4.239c6.43,6.432,6.43,16.896,0,23.324L67.41,65.9C76.179,57.129,76.179,42.864,67.41,34.095z" style></path>
+            <path
+              d="M75.89,25.616l-4.241,4.239c11.105,11.105,11.105,29.176,0,40.284l4.241,4.241C89.337,60.934,89.337,39.06,75.89,25.616z"
+              style
+            ></path>
+          </g>
+        </svg>
+        <div class="game-board-contents">
+          <div class="game-board-top">
+            <div class="player-mark">
+              <div class="cross x"></div>
+              <div class="circle o"></div>
+            </div>
+            <h4 class="turn-display">
+              <div class="cross x"></div>
+              turn
+            </h4>
+            <button class="restart-btn">
+              <i class="fa-solid fa-rotate-right"></i>
+            </button>
+          </div>
+          <div class="game-board">
+            <!-- Generated from JavaScript -->
+          </div>
+          <div class="game-board-bottom">
+            <div class="cross-score bottom-tab">
+              x (you)
+              <span class="x-score">0</span>
+            </div>
+            <div class="tie-score bottom-tab">
+              ties
+              <span class="t-score">0</span>
+            </div>
+            <div class="opponent-score bottom-tab">
+              O (CPU)
+              <span class="o-score">0</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>

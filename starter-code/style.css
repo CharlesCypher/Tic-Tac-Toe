@@ -1,0 +1,447 @@
+:root {
+    --clr-bg: #1c2c35;
+    --clr-board: #1f3540;
+    --clr-cross: #3bbebb;
+    --clr-circle: #f2b237;
+    --clr-grey: #a8bec9;
+    --clr-grey-800: #a8bec97d;
+    --shadow-dark: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    /* --shadow-cross: var(--clr-cross) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    --shadow-circle: var(--clr-circle) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset; */
+}
+
+*,
+::before,
+::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    position: relative;
+    min-height: 100vh;
+    padding: 0 2rem;
+    background-color: var(--clr-bg);
+    color: var(--clr-grey);
+    text-transform: uppercase;
+}
+
+button {
+    outline-color: transparent;
+    cursor: pointer;
+}
+
+.game-showcase {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.game-intro-info {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(100%, 500px);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 1rem;
+    transform-origin: 0% 0%;
+    transition: visibility 0.2s linear, opacity 0.2s linear;
+    visibility: visible;
+    opacity: 1;
+}
+
+.game-intro-info.hide {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.info-content {
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-dark);
+    background-color: var(--clr-board);
+}
+
+.player-mark {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 1.5rem;
+}
+
+.player-mark .cross {
+    background-color: var(--clr-cross);
+}
+
+.player-mark .cross::after {
+    background-color: var(--clr-cross);
+}
+
+.player-mark .circle {
+    background-color: var(--clr-circle);
+}
+
+.player-mark .circle::after {
+    background-color: var(--clr-bg);
+}
+
+.vs-cpu-btn,
+.vs-player-btn {
+    width: 100%;
+    padding: .8rem;
+    border: none;
+    border-radius: .5rem;
+    margin-bottom: 1rem;
+    color: var(--clr-bg);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.vs-cpu-btn {
+    box-shadow: var(--shadow-dark);
+    background-color: var(--clr-circle);
+    pointer-events: none;
+    opacity: .5;
+}
+
+.vs-player-btn {
+    box-shadow: var(--shadow-dark);
+    background-color: var(--clr-cross);
+}
+
+.player-marks-text {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    letter-spacing: .1rem;
+}
+
+.reminder-text {
+    font-size: .8rem;
+    color: var(--clr-grey-800);
+    font-weight: 700;
+    letter-spacing: .1rem;
+}
+
+.marks-btn-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    padding: .5rem;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    border-radius: .5rem;
+    background-color: var(--clr-bg);
+    z-index: 1;
+}
+
+.marks-btn-wrapper .toggle-slide {
+    position: absolute;
+    top: 0px;
+    left: 8px;
+    bottom: 0;
+    width: 50%;
+    height: 80%;
+    margin: auto 0;
+    border-radius: .5rem;
+    transform: translateX(93%);
+    transition: transform .2s ease-in-out;
+    background: rgb(34, 193, 195);
+    background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+    z-index: -1;
+}
+
+.marks-btn-wrapper .toggle-slide.slide {
+    transform: translateX(0);
+}
+
+.marks-btn-wrapper button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .6rem;
+    border: none;
+    border-radius: .5rem;
+    background: none;
+}
+
+.marks-btn-wrapper .mark-cross {
+    /* background-color: var(--clr-bg); */
+}
+
+.marks-btn-wrapper .mark-circle {
+    /* background-color: var(--clr-grey); */
+}
+
+.marks-btn-wrapper .mark-circle.active {
+    /* background-color: var(--clr-grey); */
+}
+
+.cross {
+    width: .7rem;
+    height: 2.5rem;
+    position: relative;
+    border-radius: .2rem;
+    background-color: var(--clr-grey);
+    transform: rotate(-45deg);
+}
+
+.x {
+    width: .5rem;
+    height: 2rem;
+}
+
+.cross::after {
+    content: "";
+    position: absolute;
+    top: 14px;
+    left: -14.5px;
+    width: 2.5rem;
+    height: .7rem;
+    border-radius: .2rem;
+    background-color: var(--clr-grey);
+}
+
+.x::after {
+    width: 2rem;
+    height: .5rem;
+    top: 12px;
+    left: -12px;
+}
+
+.circle {
+    position: relative;
+    width: 2.2rem;
+    height: 2.2rem;
+    background: var(--clr-grey);
+    border-radius: 50%
+}
+
+.o {
+    width: 1.8rem;
+    height: 1.8rem;
+}
+
+.circle::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1rem;
+    height: 1rem;
+    background: var(--clr-bg);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.o::after {
+    width: .8rem;
+    height: .8rem;
+}
+
+.game-board-section {
+    width: 100%;
+    height: 85vh;
+    display: grid;
+    place-items: center;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.game-board-section.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.game-board-section svg {
+    width: 50px;
+    cursor: pointer;
+}
+
+.game-board-contents {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.game-board-contents .player-mark {
+    width: 60%;
+    justify-self: start;
+    margin-bottom: 0;
+}
+
+.game-board-top {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.turn-display {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    /* justify-content: space-evenly; */
+    justify-content: center;
+    margin: 0 auto;
+    font-weight: 600;
+    padding: .5rem 0;
+    border-radius: .7rem;
+    box-shadow: var(--shadow-dark);
+    background-color: var(--clr-board);
+}
+
+.turn-display .cross {
+    width: .3rem;
+    height: 1.5rem;
+    margin-right: 1rem;
+}
+
+.turn-display .cross::after {
+    width: 1.5rem;
+    height: .3rem;
+    top: 10px;
+    left: -10px;
+}
+
+.restart-btn {
+    display: flex;
+    align-items: center;
+    justify-self: end;
+    padding: .3rem;
+    color: var(--clr-bg);
+    border: none;
+    border-radius: .2rem;
+    box-shadow: var(--shadow-dark);
+    background-color: var(--clr-grey);
+}
+
+.restart-btn i {
+    font-size: 1.5rem;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.game-rows {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.game-board .square {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-dark);
+    background-color: var(--clr-board);
+}
+
+.game-cross {
+    position: relative;
+    width: .8rem;
+    height: 4rem;
+    border-radius: .2rem;
+    transform: rotate(-45deg);
+    background-color: var(--clr-cross);
+}
+
+.game-cross::after {
+    position: absolute;
+    content: "";
+    width: 4rem;
+    height: .8rem;
+    top: 25px;
+    left: -25px;
+    background-color: var(--clr-cross);
+}
+
+.game-circle {
+    position: relative;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background-color: var(--clr-circle);
+}
+
+.game-circle::after {
+    position: absolute;
+    content: "";
+    width: 2.5rem;
+    height: 2.5rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: var(--clr-board);
+}
+
+.game-board-bottom {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    place-items: center;
+    gap: 1rem;
+}
+
+.bottom-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: .5rem;
+    border-radius: .5rem;
+    box-shadow: var(--shadow-dark);
+}
+
+.bottom-tab span {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.cross-score {
+    background-color: var(--clr-cross);
+    color: var(--clr-bg);
+}
+
+.tie-score {
+    background-color: var(--clr-grey);
+    color: var(--clr-bg);
+}
+
+.opponent-score {
+    background-color: var(--clr-circle);
+    color: var(--clr-bg);
+}
+
+.hide {
+    display: none;
+}
